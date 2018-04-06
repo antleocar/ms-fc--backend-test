@@ -1,5 +1,8 @@
 package com.scmspain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,10 +15,14 @@ public class Tweet {
     private Long id;
     @Column(nullable = false)
     private String publisher;
-    @Column(nullable = false, length = 140)
+    @Column(nullable = false, length = 1000)
     private String tweet;
     @Column (nullable=true)
     private Long pre2015MigrationStatus = 0L;
+
+    @Column(nullable = true)
+    @JsonIgnore
+    private Long discarded;
 
     public Tweet() {
     }
@@ -52,4 +59,11 @@ public class Tweet {
         this.pre2015MigrationStatus = pre2015MigrationStatus;
     }
 
+    public Long getDiscarded() {
+        return discarded;
+    }
+
+    public void setDiscarded(Long discarded) {
+        this.discarded = discarded;
+    }
 }
